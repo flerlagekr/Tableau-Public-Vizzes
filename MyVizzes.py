@@ -25,10 +25,10 @@ startDate = datetime.date(year=1970, month=1, day=1)
 scope = ['https://spreadsheets.google.com/feeds']
 
 # Read your Google API key from a local json file.
-credentials = ServiceAccountCredentials.from_json_keyfile_name('C:/Users/Flerlage/Cloud Drive/Documents/Ken/Blog/My Vizzes/Python/creds.json', scope)
+credentials = ServiceAccountCredentials.from_json_keyfile_name('<File Path Here>/creds.json', scope)
 gc = gspread.authorize(credentials) # authenticate with Google  
 
-sheet = gc.open_by_url('https://docs.google.com/spreadsheets/d/1g-F5a00M0vKiytNstbCwVp01Rpeny-zIgUaQNAUEO64')
+sheet = gc.open_by_url('https://docs.google.com/spreadsheets/d/<Spreadsheet ID Here>')
 worksheet = sheet.get_worksheet(0)
 all_cells = worksheet.range('A1:C6')
 
@@ -37,7 +37,7 @@ foundValid = 1
 # Call the Tableau Public API in chunks and write to the Google Sheet.
 while (foundValid == 1):
     parameters = {"count": pageCount, "index": index}
-    response = requests.get("https://public.tableau.com/profile/api/ken.flerlage/workbooks", params=parameters)
+    response = requests.get("https://public.tableau.com/profile/api/<Tableau Public Profile Here>/workbooks", params=parameters)
     output = response.json()
 
     for i in output:
